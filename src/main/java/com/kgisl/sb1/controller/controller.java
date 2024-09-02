@@ -23,7 +23,7 @@ public class controller {
     private PersonService personService;
 
     @GetMapping("/finalAll")
-    public ResponseEntity<List<Person>> listOfPerosn() {
+    public List<Person> listOfPerosn() {
         return personService.fetchallPerson();
 
     }
@@ -43,5 +43,9 @@ public class controller {
     public ResponseEntity<String> updatePerson(@PathVariable("id") Long id, @RequestBody Person updatedPerson) {
         return personService.updatePerson(id, updatedPerson);
        
+    }
+
+    List<Person> fetchallPerson() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
