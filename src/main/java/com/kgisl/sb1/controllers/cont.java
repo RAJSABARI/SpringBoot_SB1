@@ -1,4 +1,4 @@
-package com.kgisl.sb1.controller;
+package com.kgisl.sb1.controllers;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.kgisl.sb1.entity.Person;
 import com.kgisl.sb1.service.PersonService;
 
 @RestController
-public class controller {
+public class cont {
 
     @Autowired
     private PersonService personService;
@@ -29,23 +29,21 @@ public class controller {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Person> creatperson(@RequestBody Person person) {
-        Person saveperson = personService.createPerson(person);
-        return new ResponseEntity<>(saveperson,HttpStatus.OK);
+    public Person createPerson(@RequestBody Person person) {
+        Person pp = personService.createPerson(person);
+        return pp;
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long personLong) {
         return personService.deletee(personLong);
+
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<String> updatePerson(@PathVariable("id") Long id, @RequestBody Person updatedPerson) {
+    public ResponseEntity<Person> updatePerson(@PathVariable("id") Long id, @RequestBody Person updatedPerson) {
         return personService.updatePerson(id, updatedPerson);
-       
+
     }
 
-    List<Person> fetchallPerson() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }

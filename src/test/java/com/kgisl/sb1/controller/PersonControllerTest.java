@@ -5,13 +5,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
+import com.kgisl.sb1.controllers.cont;
 import com.kgisl.sb1.entity.Person;
 import com.kgisl.sb1.service.PersonService;
 
@@ -26,12 +30,13 @@ public class PersonControllerTest {
   private PersonService personService;
 
   @InjectMocks
-  private controller personController;
+  private cont personController;
 
   public static List<Person> expected;
   
   Person person1 = new Person(1,"Alice","alice@example.com");
   Person person2 = new Person(2,"Bob","bob@example.com");
+  
 
   // public Person person2 = new PersonBuilder().id(2L).name("aravinth").build();
 
@@ -45,7 +50,7 @@ public void listOfPerosn() {
     when(personService.fetchallPerson()).thenReturn(expected);
 
     // Execute the method under test
-    List<Person> actual = personController.fetchallPerson();
+    List<Person> actual = personController.listOfPerosn();
 
     // Assertions
     // assertNotNull(actual, "The response body should not be null.");
@@ -53,31 +58,31 @@ public void listOfPerosn() {
 }
 
 
-//   @Test
-//   public void getPersonByIdTest() {
-//     int id = 1;
-//     when(personService.getPersonById(id)).thenReturn(null);
-//     ResponseEntity<Person> actual = personController.getPersonById(id);
-//     assertNotNull(actual);
-//   }
+  // @Test
+  // public void getPersonByIdTest() {
+  //   int id = 1;
+  //   when(personService.getPersonById(id)).thenReturn(null);
+  //   ResponseEntity<Person> actual = personController.getPersonById(id);
+  //   assertNotNull(actual);
+  // }
 
-//   @Test
-//   public void createPersonTest() {
-//     when(personService.createPerson(person1)).thenReturn(person1);
-//     personController.createPerson(person1);
-//   }
+  @Test
+  public void createPersonTest() {
+    when(personService.createPerson(person1)).thenReturn(person1);
+    personController.createPerson(person1);
+  }
 
-//   @Test
-//   public void updatePersonTest() {
-//     // Person edit = new PersonBuilder().name("shanmugam").build();
-//     int id = 1;
-//     // when(personService.updatePerson(id, person1)).thenReturn(person1);
-//     ResponseEntity<Person> actual = personController.updatePerson(id, person1);
-//     assertNotNull(actual);
-//     System.out.println("Actual is  "+actual.getBody());
-//     System.out.println("expected-->" + expected);
-//     // assertEquals(edit, actual.getBody());
-//   }
+  @Test
+  public void updatePersonTest() {
+    // Person edit = new PersonBuilder().name("shanmugam").build();
+    Long id = 1l;
+    // when(personService.updatePerson(id, person1)).thenReturn(person1);
+    ResponseEntity<Person> actual = personController.updatePerson(id, person1);
+    // assertNotNull(actual);
+    // System.out.println("Actual is  "+actual.getBody());
+    // System.out.println("expected-->" + expected);
+    assertEquals(expected, actual);
+  }
 
 //   @Test
 //   public void deletePersonTest() {

@@ -27,14 +27,20 @@ public class PersonService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<String> updatePerson(Long id, Person updatedPerson) {
-        personRepo.save(updatedPerson);
-        return new ResponseEntity<>("updated", HttpStatus.OK);
+    public ResponseEntity<Person> updatePerson(Long id, Person updatedPerson) {
+        return new ResponseEntity<>(personRepo.save(updatedPerson), HttpStatus.OK);
 
     }
 
     public Person createPerson(Person p) {
-        return personRepo.save(p);
+      return personRepo.save(p);
+    
     }
+
+    public Person getPersonById(long id) {
+
+            return personRepo.findById(id).orElse(null);
+                  
+    } 
 
 }
